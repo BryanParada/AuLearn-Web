@@ -1,0 +1,963 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SitioM.master.cs" Inherits="AuLearn_Web.SitioM" %>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head runat="server">
+    <link rel="shortcut icon" href="Images/aulearn/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AuLearn - Ambiente de Aprendizaje</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <%-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">--%>
+    <%--agregar el min si da problemas--%>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- PDF -->
+    <script src="Scripts/jspdf.min.js"></script>
+
+   
+    <script src="vendor/chart.js/Chart.min.js"></script>
+   
+ 
+   
+</head>
+
+<body class="fixed-nav" id="page-top">
+
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="HomeA.aspx">
+            <img src="Images/aulearn/aulearn icono.PNG" height="25">
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Inicio">
+                    <a class="nav-link" href="HomeA.aspx">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-link-text">Inicio</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Administración" id="liAdmin_Administracion" runat="server">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-file"></i>
+                        <span class="nav-link-text"> Administración</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                        <li>
+                            <a href="AdminColegio.aspx"><i class="fa fa-university"></i> Administración Colegio</a>
+                        </li>
+                        <li>
+                            <a href="AgregarPersonas.aspx"><i class="fa fa-users"></i> Administración Personas</a>
+                        </li>
+                        <li>
+                            <a href="AsignarProfesores.aspx"><i class="fa fa-book"></i> Asignación profesores a cursos</a>
+                        </li>
+                        <li>
+                            <a href="AdminDiscapacidades.aspx"><i class="fa fa-wheelchair"></i> Administración Discapacidades</a>
+                        </li>
+                        <li>
+                            <a href="ControlUso.aspx"><i class="fa fa-search-plus"></i> Administración Controles de Uso</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alumnos" id="liAdmin_Alumnos" runat="server">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                        <i class="fa fa-users"></i>
+                        <span class="nav-link-text"> Alumnos</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseComponents">
+                        <li>
+
+                            <a href="AgregarAlumnos.aspx"><i class="fa fa-plus-circle"></i> Administración Alumnos</a>
+                        </li>
+                        <li>
+                            <a href="AsignarCursos"><i class="fa fa-pencil"></i> Asignar Alumnos a Cursos</a>
+                        </li>
+                        <%-- <li>
+                            <a href="#"><i class="fa fa-pencil"></i>Modificar Alumnos</a>
+                        </li>--%>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Actividades" id="liUser_actividades" runat="server">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-sitemap"></i>
+                        <span class="nav-link-text"> Actividades</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseMulti">
+                        <li>
+                            <a href="AgregarActividades.aspx"><i class="fa fa-plus-circle"></i> Evaluación Alumnos</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pencil"></i> Modificar Evaluaciones - En construcción</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart"></i> Administración de Niveles de Evaluación</a>
+                        </li>
+                        <%--<li>
+                            <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
+                            <ul class="sidenav-third-level collapse" id="collapseMulti2">
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                            </ul>
+                        </li>--%>
+                    </ul>
+                </li>
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Informes" id="liUser_Informes" runat="server">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2" data-parent="#exampleAccordion">
+                        <i class="fa fa-file-text"></i>
+                        <span class="nav-link-text"> Generación de Informes</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseMulti2">
+                        <li>
+                            <a href="InformeNivel.aspx"><i class="fa fa-file-o"></i> Informes de Desempeño</a>
+                        </li>
+                        <li>
+                            <a href="GenerarInformeNotas.aspx"><i class="fa fa-file-o"></i> Informes de Notas</a>
+                        </li>
+                        <%-- <li>
+                            <a href="Informe.aspx"><i class="fa fa-file-o"></i> Informes de Notas Antiguo</a>
+                        </li>--%>
+                        <li>
+                            <a href="informeDiscapacidad.aspx"><i class="fa fa-wheelchair"></i> Informes de Discapacidad</a>
+                        </li>
+                        <li>
+                            <a href="GenerarAsistencia.aspx"><i class="fa fa-address-book"></i> Generar Asistencia</a>
+                        </li>
+
+                    </ul>
+                </li>
+                 
+                
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Soporte" id="liSoporte" runat="server">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti3" data-parent="#exampleAccordion">
+                        <i class="fa fa-wrench"></i>
+                        <span class="nav-link-text"> Sección Soporte</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseMulti3">
+                        <li id="liAsignar_Tickets" runat="server">
+                            <a href="Soporte.aspx"><i class="fa fa-tag"></i> Asignar Tickets</a>
+                        </li>
+                         <li>
+                            <a href="Sugerencias.aspx"><i class="fa fa-commenting-o"></i> Sugerencias</a>
+                        </li>
+                         <li id="liResolver_tickets" runat="server">
+                            <a href="ResolverTicket.aspx"><i class="fa fa-check"></i> Resolver Tickets</a>
+                        </li>
+                        
+
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Guias de aprendizaje" id="liUser_Guias" runat="server">
+                    <a class="nav-link" href="subirGuia.aspx">
+                        <i class="fa fa-file-pdf-o"></i>
+                        <span class="nav-link-text">Guias de aprendizaje</span>
+                    </a>
+                </li> 
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Aplicación Didáctica" id="liUser_Applicacion" runat="server">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-paint-brush"></i>
+                        <span class="nav-link-text">Aplicación Didáctica - En construcción</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-circle"></i>
+                        <asp:Label ID="lblUser" runat="server"></asp:Label>
+
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+
+                        <h6 class="dropdown-header">Panel de Usuario</h6>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="Perfil.aspx">
+                            <i class="fa fa-pencil"></i><strong> Editar Perfil</strong>
+                        </a>
+
+                        <a class="dropdown-item" href="CambioPass.aspx">
+                            <i class="fa fa-lock"></i><strong> Cambiar Contraseña</strong>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal" role="button">
+                            <i class="fa fa-fw fa-sign-out"></i><strong> Cerrar Sesión</strong>
+                        </a>
+                    </div>
+                </li>
+                <%-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-bell"></i>
+            <span class="d-lg-none">Alerts
+              <span class="badge badge-pill badge-warning">6 New</span>
+            </span>
+            <span class="indicator text-warning d-none d-lg-block">
+              <i class="fa fa-fw fa-circle"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">New Alerts:</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-success">
+                <strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-danger">
+                <strong>
+                  <i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-success">
+                <strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item small" href="#">View all alerts</a>
+          </div>
+        </li> --%>
+                <%-- <li class="nav-item">
+          <form class="form-inline my-2 my-lg-0 mr-lg-2">
+            <div class="input-group">
+              <input class="form-control" type="text" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+        </li>--%>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-lg-2" id="AyudaDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-envelope"></i> Ayuda y Contacto
+   
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+
+                        <h6 class="dropdown-header">Panel de Ayuda</h6>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" data-toggle="modal" data-target="#ModalSoporte">
+                            <i class="fa fa-wrench"></i><strong> Soporte Técnico</strong>
+                        </a>
+
+                        <a class="dropdown-item" data-toggle="modal" data-target="#ModalSugerencias">
+                            <i class="fa fa-commenting-o"></i><strong> Sugerencias y Comentarios</strong>
+                        </a>
+
+                        <a class="dropdown-item" data-toggle="modal" data-target="#ModalReclamos">
+                            <i class="fa fa-exclamation-circle"></i><strong> Reclamos</strong>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#modalFAQ">
+                            <i class="fa fa-question-circle"></i><strong> Preguntas Frecuentes</strong>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>
+                        Cerrar Sesión</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper py-3">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs -->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="HomeA.aspx"><i class="fa fa-home"></i>Inicio</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <asp:ContentPlaceHolder ID="BreadCrumb" runat="server" />
+                </li>
+            </ol>
+
+
+            <form id="form1" runat="server">
+
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+               
+                <asp:HiddenField runat="server" ID="nombresal" />
+                <asp:HiddenField runat="server" ID="promal" />
+                <asp:HiddenField runat="server" ID="nombresprof" />
+                <asp:HiddenField runat="server" ID="horasprof" />
+
+                <asp:HiddenField runat="server" ID="promBMA" />
+                <asp:HiddenField runat="server" ID="promBMAGeneral" />
+
+                <asp:ContentPlaceHolder ID="Main" runat="server" />
+
+
+
+
+
+                <!-- Logout Modal -->
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">¿Desea cerrar la sesión actual?</h5>
+                                <button id="btnCerrarSesion" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Seleccione "Salir" si desea cerrar la sesión actual.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <asp:Button ID="btnSalir" runat="server" OnClick="btnSalir_Click" CausesValidation="false" Text="Salir" class="btn btn-primary" UseSubmitBehavior="false" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal Soporte Técnico -->
+
+                <div class="modal fade" id="ModalSoporte" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TituloModalSoporte"><i class="fa fa-wrench"></i> Soporte Técnico</h5>
+                                <button id="Button3" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Tienes problemas con el sistema AuLearn? Escríbelo Aquí! El equipo de Soporte de AuLearn se pondrá en contacto a la brevedad.
+
+                                 <br />
+                                <br />
+
+
+                                <asp:Label ID="Label1" runat="server" Text="Asunto:"></asp:Label>
+                                <asp:TextBox ID="txtAsuntoSoporte" runat="server" class="form-control" placeholder="Asunto"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorAsunto"
+                                    ControlToValidate="txtAsuntoSoporte"
+                                    Display="Dynamic"
+                                    ErrorMessage="Debe ingresar un asunto"
+                                    runat="server"
+                                    ForeColor="Red"
+                                    ValidationGroup="textsSoporte"   />
+                                <br />
+
+                                
+                                <asp:UpdatePanel ID="updModulos" runat="server">
+                                    <ContentTemplate>
+
+                                        <label>Módulo en donde se encontró el problema</label>
+                                        <asp:DropDownList ID="DropDownListModulo" runat="server" AutoPostBack="True" class="form-control" DataSourceID="SqlDataSourceModulo" DataTextField="descripcion_modulo" DataValueField="id_modulo"></asp:DropDownList>
+                                        <asp:SqlDataSource runat="server" ID="SqlDataSourceModulo" ConnectionString='<%$ ConnectionStrings:aulearnConnectionString %>' SelectCommand="SELECT * FROM [Modulo]"></asp:SqlDataSource>
+                                        <br />
+                                        <label>Subcategoría en donde se encontró el problema</label>
+                                        <asp:DropDownList ID="DropDownListSubCategoria" runat="server" AutoPostBack="True" class="form-control" DataSourceID="SqlDataSourceSubCategoria" DataTextField="descripcion_subcategoria" DataValueField="id_subcategoria"></asp:DropDownList>
+
+                                        <asp:SqlDataSource runat="server" ID="SqlDataSourceSubCategoria" ConnectionString='<%$ ConnectionStrings:aulearnConnectionString %>' SelectCommand="select * from SubCategoria where id_modulo = @id_modulo">
+                                            <SelectParameters>
+                                                <asp:ControlParameter ControlID="DropDownListModulo" PropertyName="SelectedValue" Name="id_modulo"></asp:ControlParameter>
+                                            </SelectParameters>
+                                        </asp:SqlDataSource>
+                                        <br />
+
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+
+
+                                <asp:Label ID="Label2" runat="server" Text="Comentarios:"></asp:Label>
+                                <asp:TextBox ID="txtComentarioSoporte" runat="server" class="form-control" TextMode="multiline" Columns="50" Rows="5" placeholder="Comentarios..."></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorComentario"
+                                    ControlToValidate="txtComentarioSoporte"
+                                    Display="Dynamic"
+                                    ErrorMessage="Debe especificar el problema"
+                                    runat="server"
+                                    ForeColor="Red" 
+                                    ValidationGroup="textsSoporte"  />
+                                <br />
+                                <br />
+
+                            </div>
+
+                            <div class="modal-footer">
+                               
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancelar</button>
+                                <asp:Button ID="ButtonEnviarSoporte" OnClick="ButtonEnviarSoporte_Click" runat="server" Text="Enviar" class="btn btn-primary"  ValidationGroup="textsSoporte" CausesValidation="false" UseSubmitBehavior="false"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+         
+
+                <!--Modal Sugerencias y Comentarios -->
+
+                <div class="modal fade" id="ModalSugerencias" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TituloModalSugerencias"><i class="fa fa-commenting-o"></i> Sugerencias y Comentarios</h5>
+                                <button id="Button1" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Tienes sugerencias y comentarios de cómo mejorar el Sistema AuLearn? Escríbelo Aquí!
+
+                                 <br />
+                                <br />
+
+
+                                <asp:Label ID="lblAsunto" runat="server" Text="Asunto:"></asp:Label>
+                                <asp:TextBox ID="txtAsuntoSugerencia" runat="server" class="form-control" placeholder="Asunto"></asp:TextBox> 
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                                     class="validator" 
+                                    runat="server" 
+                                    ErrorMessage="Campo requerido"
+                                     ControlToValidate="txtAsuntoSugerencia" 
+                                    ValidationGroup="ValidateSeccionSugerencia" 
+                                    ForeColor="#C10000"></asp:RequiredFieldValidator>
+                                <br />
+
+                                <asp:Label ID="lblComentarioSugerencia" runat="server" Text="Comentarios:"></asp:Label>
+                                <asp:TextBox ID="txtComentarioSugerencia" runat="server" class="form-control" TextMode="multiline" Columns="50" Rows="5" placeholder="Comentarios..."></asp:TextBox><br />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
+                                     class="validator" 
+                                    runat="server" 
+                                    ErrorMessage="Campo requerido"
+                                     ControlToValidate="txtComentarioSugerencia" 
+                                    ValidationGroup="ValidateSeccionSugerencia" 
+                                    ForeColor="#C10000"></asp:RequiredFieldValidator>
+                         
+                                <br />
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <%--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalConfirmacion">test</button>--%>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <asp:Button ID="btnEnviarSugerencia" runat="server"  Text="Enviar" class="btn btn-primary" ValidationGroup="ValidateSeccionSugerencia" onClick="btnEnviarSugerencia_Click" CausesValidation="false" UseSubmitBehavior="false"/> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal Reclamos -->
+
+                <div class="modal fade" id="ModalReclamos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TituloModalReclamos"><i class="fa fa-exclamation-circle"></i> Reclamos</h5>
+                                <button id="Button6" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Tienes algún reclamo? Escríbelo Aquí!
+
+                                 <br />
+                                <br />
+
+
+                                <asp:Label ID="Label3" runat="server" Text="Asunto:"></asp:Label>
+                                <asp:TextBox ID="txtAsuntoReclamo" runat="server" class="form-control" placeholder="Asunto"></asp:TextBox> 
+                                <asp:RequiredFieldValidator 
+                                    ID="RequiredFieldValidator2"
+                                     class="validator"
+                                     runat="server"
+                                     ErrorMessage="Campo requerido"
+                                     ControlToValidate="txtAsuntoReclamo"
+                                     ValidationGroup="ValidateSeccionReclamo"
+                                     ForeColor="#C10000"></asp:RequiredFieldValidator>
+                                <br />
+
+                                <asp:Label ID="Label4" runat="server" Text="Comentarios:"></asp:Label>
+                                <asp:TextBox ID="txtComentarioReclamo" runat="server" class="form-control" TextMode="multiline" Columns="50" Rows="5" placeholder="Escriba su reclamo aquí..."></asp:TextBox>
+                                 <asp:RequiredFieldValidator 
+                                    ID="RequiredFieldValidator4"
+                                     class="validator"
+                                     runat="server"
+                                     ErrorMessage="Campo requerido"
+                                     ControlToValidate="txtComentarioReclamo"
+                                     ValidationGroup="ValidateSeccionReclamo"
+                                     ForeColor="#C10000"></asp:RequiredFieldValidator>
+                                <br />
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <%--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalConfirmacion">test</button>--%>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <asp:Button ID="btnEnviarReclamo" runat="server"  Text="Enviar" class="btn btn-primary" ValidationGroup="ValidateSeccionReclamo" CausesValidation="false" UseSubmitBehavior="false" /> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 
+                <%--Modal Confirmación soporte tecnico--%>
+                <div class="modal fade" id="ModalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TituloConfirmacion"><i class="fa fa-wrench"></i> Gracias por reportar el problema</h5>
+                                <button id="Button2" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Gracias por reportar el problema. El Equipo de Soporte de AuLearn se contactará a la brevedad.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%--Modal Confirmación sugerencias--%>
+                <div class="modal fade" id="ModalConfirmacionSugerencias" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TituloConfirmacionSugerencia"><i class="fa fa-commenting-o"></i> Gracias por tus comentarios</h5>
+                                <button id="Button7" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Gracias por tus comentarios y sugerencias, ¡Así podremos mejorar!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <%--Modal Preguntas Frecuentes--%>
+                <div class="modal fade" id="modalFAQ" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TituloFAQ"><i class="fa fa-commenting-o"></i>Preguntas Frecuentes</h5>
+                                <button id="Button4" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <strong>¿Lorem ipsum dolor sit amet, consectetur adipiscing elit.?</strong>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                <br />
+                                <br />
+                                <strong>¿Vivamus condimentum nisi in ex sodales tincidunt.?</strong>
+                                Vestibulum facilisis ante vitae placerat mattis. Duis eu enim commodo, suscipit ex sit amet, consectetur nulla.
+                                 <br />
+                                <br />
+                                <strong>¿Etiam pulvinar est vel ex rutrum cursus.?</strong>
+                                Duis vitae mauris rhoncus, tristique nisl a, maximus ligula.
+                                 <br />
+                                <br />
+                                <a href="ftp://bryan:jklin1580@192.168.72.1:21/Manual%20de%20Usuario%20AuLearn.pdf"> Descargar Manual de Usuario</a>
+                                <br />
+                                <br />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Volver</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  
+              
+    
+
+                <%--Modal Confirmación control de uso--%>
+    <div class="modal fade" id="modalConfControlUso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="TituloModalConfCtrlUso"><i class="fa fa-search-plus"></i>Confirmación</h5>
+                    <button id="Button9" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   El control de uso se ha asignado correctamente.
+                </div>
+                <div class="modal-footer">
+                   <asp:Button ID="btnConfControlUso" runat="server" Text="Ok" class="btn btn-primary" OnClick="btnConfControlUso_Click"/> 
+                </div>
+            </div>
+        </div>
+    </div>
+   <%--Modal Confirmación cambio contraseña--%>
+    <div class="modal fade" id="ModalConfirmacionPass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloModalPass"><i class="fa fa-user"></i>Confirmación</h5>
+                    <button id="Button10" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   La contraseña se ha modificado correctamente.
+                </div>
+                <div class="modal-footer">
+                   <asp:Button ID="btnConfPass" runat="server" Text="Ok" class="btn btn-primary" OnClick="btnConfPass_Click"/> 
+                </div>
+            </div>
+        </div>
+    </div>
+                <%--Modal Confirmación perfil--%>
+    <div class="modal fade" id="ModalConfirmacionEdicionPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloModalEdicionPerfil"><i class="fa fa-user"></i>Confirmación</h5>
+                    <button id="Button11" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   Los datos se han modificado correctamente.
+                </div>
+                <div class="modal-footer">
+                   <asp:Button ID="btnConfEdPerfil" runat="server" Text="Ok" class="btn btn-primary" OnClick="btnConfEdPerfil_Click"/> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+                <%--Modal Bienvenida Director--%>
+                <div class="modal fade" id="ModalBienvenidaDirector" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TituloModalBienvenidaDirector"><i class="fa fa-commenting-o"></i> Bienvenido a Aulearn</h5>
+                                <button id="Button5" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div align="center">
+                        <img src="Images/aulearn/aulearn icono.PNG" height="70" align="middle" />
+                    </div>
+                                 <br />
+                    <br />
+                                Gracias por preferir a Aulearn. Si este es tu primer uso, te recomendamos revisar los datos y subir el logo correspondiente de la institución.
+                                      <br />
+                    <br />
+
+                                 <div align="center">
+                        <img src="Images/aulearn/pic1.jpg" height="220" align="middle" />
+                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:Button ID="btnIrAColegio" runat="server" OnClick="btnIrAColegio_Click" CausesValidation="false" Text="Ir a Administración Colegio" class="btn btn-primary" UseSubmitBehavior="false" />
+                                <%--<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>--%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <%--Modal Confirmación SOPORTE--%>
+                <div class="modal fade" id="modalASIGNAR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TitulomodalASIGNAR"><i class="fa fa-wrench"></i> Confirmación</h5>
+                                <button id="Button8" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                               El ticket se ha asignado correctamente.
+                            </div>
+                            <div class="modal-footer">
+                                <%--<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>--%>
+                                <asp:Button ID="buttonConfirmacionAsignTick" runat="server" Text="Ok" class="btn btn-primary" OnClick="buttonConfirmacionAsignTick_Click" /> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                 <%--Modal Confirmación Resolucion Ticket--%>
+                <div class="modal fade" id="modalResolucionTicket" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" runat="server">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TitulomodalResolucion"><i class="fa fa-wrench"></i> Confirmación</h5>
+                                <button id="Button12" type="button" class="close" data-dismiss="modal" aria-label="Close" runat="server">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                               El ticket se ha resuelto correctamente.
+                            </div>
+                            <div class="modal-footer">
+                                <%--<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>--%>
+                                <asp:Button ID="btnConfResolucion" runat="server" Text="Ok" class="btn btn-primary" OnClick="btnConfResolucion_Click"/> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+
+        <!-- /.container-fluid-->
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Aulearn - 2018 - Versión Prototipo </small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+
+
+    </div>
+
+    <script>
+
+        
+
+        //// -- grafico uso
+        var ctx = document.getElementById("ChartUSO");
+
+        var nombresalCC = document.getElementById("nombresprof").value;
+        var nombresal = nombresalCC.slice(0, -1);
+        var promalCC = document.getElementById("horasprof").value;
+        var promal = promalCC.slice(0, -1);
+
+        var rString = nombresal.split(",");
+        var rString2 = promal.split(",");
+        var arralumnos = [];
+        var arrprom = [];
+
+        for (i = 0; i < rString.length; i++) {
+            arralumnos.push(rString[i]);
+            arrprom.push(rString2[i]);
+        }
+
+        var myLineChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: arralumnos,
+                datasets: [{
+                    label: "Horas de uso",
+                    backgroundColor: "rgba(2,117,216,1)",
+                    borderColor: "rgba(2,117,216,1)",
+                    data: arrprom,
+                }],
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'month'
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 10,
+                            maxTicksLimit: 5
+                        },
+                        gridLines: {
+                            display: true
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+
+        // -- Bar Chart Example
+        var ctx = document.getElementById("myBarChart");
+
+        var nombresalCC = document.getElementById("nombresal").value;
+        var nombresal = nombresalCC.slice(0, -1);
+        var promalCC = document.getElementById("promal").value;
+        var promal = promalCC.slice(0, -1);
+
+        var rString = nombresal.split(",");
+        var rString2 = promal.split(",");
+        var arralumnos = [];
+        var arrprom = [];
+
+
+        for (i = 0; i < rString.length; i++) {
+            arralumnos.push(rString[i]);
+            arrprom.push(rString2[i]);
+        }
+
+        var myLineChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: arralumnos,
+                datasets: [{
+                    label: "Promedio Actual",
+                    backgroundColor: "rgba(2,117,216,1)",
+                    borderColor: "rgba(2,117,216,1)",
+                    data: arrprom,
+                }],
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'month'
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 70,
+                            maxTicksLimit: 5
+                        },
+                        gridLines: {
+                            display: true
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+        
+        // -- Pie Chart Example
+        var ctx = document.getElementById("myPieChart");
+
+        var nombresalCC = document.getElementById("promBMA").value;
+        var nombresal = nombresalCC.slice(0, -1); 
+
+        var rString = nombresal.split(","); 
+        var arralumnos = []; 
+
+
+        for (i = 0; i < rString.length; i++) {
+            arralumnos.push(rString[i]); 
+        }
+
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ["Peligro", "Normal", "Cuidado"],
+                datasets: [{
+                    data: arralumnos,
+                    backgroundColor: ['#dc3545', '#28a745', '#ffc107'],
+                }],
+            },
+        });
+ 
+    </script>
+
+           <%--CAMBIAR DE AQUI ABAJO ESTOS SCRIPTS SI DA ERROR--%>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for this template -->
+
+    <script src="Scripts/sb-admin.js"></script>
+    <%--<script src="js/sb-admin.js"></script>--%>
+    <%-- <script src="Scripts/KeyPress.js"></script>--%>
+
+</body>
+</html>
