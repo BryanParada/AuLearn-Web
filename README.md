@@ -90,6 +90,10 @@ Documentación de Microsoft en Arquitectura ASP.NET)
 ## ¿Qué tecnología se utilizó?
 
 *ASP.NET
+*C#
+*CSS
+*HTML
+*JavaScript
 *SQL SERVER 2016
  
 ## Videos Demo
